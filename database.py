@@ -8,9 +8,14 @@ conn = sqlite3.connect("customer.db")
 #Create a cursor
 c = conn.cursor()
 
-#Query the Database
-c.execute("SELECT * FROM customers WHERE LIKE first_name = 'Joao'")
-c.execute("SELECT * FROM customers WHERE email LIKE '%github.com'")
+#Update Records
+c.execute("""UPDATE customers SET first_name = "Casquinho"
+            WHERE rowid = 4
+         """)
+
+#Delete Records
+c.execute("DELETE from customers WHERE rowid = 6")
+c.execute("SELECT rowid, * FROM customers")
 
 items = c.fetchall()
 for item in items:
