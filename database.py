@@ -8,19 +8,15 @@ conn = sqlite3.connect("customer.db")
 #Create a cursor
 c = conn.cursor()
 
-#Create a table
-c.execute("""CREATE TABLE customers(
-        first_name text,
-        last_name text,
-        email text
-    )""")
+#Inserting many items to a Table.
+many_customers = [
+                    ('Cas', 'Cão', 'cascao@github.com'),
+                    ('Maga', 'Li', 'magali@github.com'),
+                    ('Mon','Ica','monica@github.com'),
+]        
+print("Command executed succesfully!")
 
-# *data types*
-#NULL: does exits or not exits. (not NULL or NULL) 
-#INTEGER: numbers.
-#REAL: decimal numbers.
-#TEXT: literal text.
-#BLOB: images, mp3 files and etc.
+c.executemany("INSERT INTO customers VALUES (?,?,?)", many_customers)
 
 #Commit our command
 conn.commit()
