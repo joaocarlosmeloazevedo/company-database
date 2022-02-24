@@ -8,9 +8,9 @@ conn = sqlite3.connect("customer.db")
 #Create a cursor
 c = conn.cursor()
 
-#Query The Database - AND/OR
-c.execute("SELECT rowid, * FROM customers WHERE last_name LIKE 'Br%' AND rowid = 3")#(3, 'Mary', 'Brown', 'mary@codemy.com')
-c.execute("SELECT rowid, * FROM customers WHERE last_name LIKE 'Br%' OR rowid = 3")#(3, 'Mary', 'Brown', 'mary@codemy.com'), (4, 'Wes', 'Brown', 'wes@brown.com')
+#Query The Database - LIMITING the RESULTS
+c.execute("SELECT rowid, * FROM customers LIMIT 3")
+c.execute("SELECT rowid, * FROM customers ORDER BY rowid DESC LIMIT 3")
 
 items = c.fetchall()
 
