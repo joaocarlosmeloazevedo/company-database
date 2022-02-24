@@ -9,39 +9,10 @@ conn = sqlite3.connect("customer.db")
 c = conn.cursor()
 
 #Query The Database - AND/OR
-c.execute("SELECT rowid, * FROM customers")
+c.execute("SELECT rowid, * FROM customers WHERE last_name LIKE 'Br%' AND rowid = 3")#(3, 'Mary', 'Brown', 'mary@codemy.com')
+c.execute("SELECT rowid, * FROM customers WHERE last_name LIKE 'Br%' OR rowid = 3")#(3, 'Mary', 'Brown', 'mary@codemy.com'), (4, 'Wes', 'Brown', 'wes@brown.com')
 
 items = c.fetchall()
-pk = 1
-for item in items:
-    while pk < 6:
-        print("We're in the ",pk,"º Column:")
-        updt_firstname = input("Type the First Name.\n")
-        c.execute(f"UPDATE customers SET first_name =? WHERE rowid =?",
-                  (updt_firstname,pk))
-        pk += 1
-    print(item)
-
-pk = 1
-for item in items:
-    while pk < 6:
-        print("We're in the ", pk, "º Column:")
-        updt_lastname = input("Type the Last Name.\n")
-        c.execute(f"UPDATE customers SET last_name=? WHERE rowid =?",
-                  (updt_lastname, pk))
-        pk += 1
-    print(item)
-
-pk = 1
-for item in items:
-    while pk < 6:
-        print("We're in the ", pk, "º Column:")
-        updt_email = input("Type the E-mail.")
-        c.execute(f"UPDATE customers SET email =? WHERE rowid =?",
-                  (updt_email, pk))
-
-        pk += 1
-    print(item)
 
 for item in items:
     print(item)
