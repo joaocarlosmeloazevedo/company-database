@@ -8,9 +8,12 @@ conn = sqlite3.connect("customer.db")
 #Create a cursor
 c = conn.cursor()
 
-#Query The Database - LIMITING the RESULTS
-c.execute("SELECT rowid, * FROM customers LIMIT 3")
-c.execute("SELECT rowid, * FROM customers ORDER BY rowid DESC LIMIT 3")
+#DROP TABLE
+c.execute("DROP TABLE customers")
+conn.commit()
+
+c.execute("SELECT rowid, * FROM customers")
+
 
 items = c.fetchall()
 
