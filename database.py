@@ -8,14 +8,10 @@ conn = sqlite3.connect("customer.db")
 #Create a cursor
 c = conn.cursor()
 
-#Update Records
-c.execute("""UPDATE customers SET first_name = "Casquinho"
-            WHERE rowid = 4
-         """)
+#Order Data
 
-#Delete Records
-c.execute("DELETE from customers WHERE rowid = 6")
-c.execute("SELECT rowid, * FROM customers")
+c.execute("SELECT * FROM customers ORDER BY last_name DESC") #Ordering alphabetically descending
+c.execute("SELECT rowid, * FROM customers ORDER BY rowid DESC")
 
 items = c.fetchall()
 for item in items:
